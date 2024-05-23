@@ -1,0 +1,56 @@
+CREATE DATABASE EXEMPLO_LOJA;
+
+USE EXEMPLO_LOJA;
+
+CREATE TABLE cliente
+(
+  idcliente integer key auto_increment,
+  descliente varchar(50),
+  datnascimento date,
+  telefone varchar(30),
+  email varchar(50),
+  fgativo integer  
+);
+
+CREATE TABLE tipo
+(
+  idtipo integer primary key auto_increment,
+  desctipo varchar(50),
+  fgativo integer
+);
+
+CREATE TABLE produto
+(
+  idproduto integer primary key auto_increment,
+  idtipo integer,
+  validade varchar(12),
+  descprod varchar(50),
+  qtde decimal(8,2),
+  prevenda decimal(8,2),
+  fgativo integer,
+  FOREIGN KEY (idtipo) REFERENCES tipo(idtipo)  
+);
+
+CREATE TABLE venda
+(
+  idvenda integer primary key auto_increment,
+  idcliente integer,
+  totvenda decimal(8,2),
+  datvenda date,
+  fgativo integer,
+  FOREIGN KEY (idcliente) REFERENCES cliente(idcliente)  	  
+);
+
+CREATE TABLE item_venda
+(
+  iditem_venda integer primary key auto_increment,
+  idproduto integer,
+  idvenda integer,
+  quavendida integer,
+  totparcial decimal(8,2),
+  FOREIGN KEY (idvenda) REFERENCES venda(idvenda),
+  FOREIGN KEY (idproduto) REFERENCES produto(idproduto)	
+ 
+);
+
+
